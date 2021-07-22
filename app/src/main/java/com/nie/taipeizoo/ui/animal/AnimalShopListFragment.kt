@@ -76,11 +76,11 @@ class AnimalShopListFragment : BaseFragment() {
     private fun showServerErrorDialog() {
         AlertDialog.Builder(requireContext()).apply {
             setCancelable(false)
-            setMessage("伺服器錯誤")
-            setNegativeButton("重試", { _, _ ->
+            setMessage(requireContext().getString(R.string.server_error))
+            setNegativeButton(requireContext().getString(R.string.retry), { _, _ ->
                 viewModel.fetchZooShop()
             })
-            setPositiveButton("取消", { _, _ ->
+            setPositiveButton(requireContext().getString(R.string.cancel), { _, _ ->
                 requireActivity().finish()
             })
         }.create().show()

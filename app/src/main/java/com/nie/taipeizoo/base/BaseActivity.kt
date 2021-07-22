@@ -34,11 +34,11 @@ abstract class BaseActivity : AppCompatActivity() {
         })
     }
 
-    fun showLoading() {
+    private fun showLoading() {
         loadingDialog.show()
     }
 
-    fun hideLoading() {
+    private fun hideLoading() {
         loadingDialog.dismiss()
     }
 }
