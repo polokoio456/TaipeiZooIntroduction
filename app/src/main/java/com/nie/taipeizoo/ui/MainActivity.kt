@@ -1,11 +1,11 @@
-package com.nie.taipeizoo.ui.animal
+package com.nie.taipeizoo.ui
 
 import android.os.Bundle
 import com.nie.taipeizoo.R
 import com.nie.taipeizoo.base.BaseActivity
 import com.nie.taipeizoo.databinding.ActivityMainBinding
 import com.nie.taipeizoo.extension.addFragment
-import com.nie.taipeizoo.ui.MainViewModel
+import com.nie.taipeizoo.ui.animal.AnimalShopListFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
