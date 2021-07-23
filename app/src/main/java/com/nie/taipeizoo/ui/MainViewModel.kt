@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
 
     companion object {
-        private const val LOG_TAG = "Nie"
+        private const val LOG_TAG = "TaipeiZoo"
     }
 
     private val _animalShopList = MutableLiveData<List<AnimalShop>>()
