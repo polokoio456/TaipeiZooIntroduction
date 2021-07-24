@@ -21,8 +21,8 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
     private val _showServerError = MutableLiveData<Boolean>()
     val showServerError: LiveData<Boolean> = _showServerError
 
-    fun fetchZooShop() {
-        mainRepository.fetchShop()
+    fun fetchAnimalShop() {
+        mainRepository.fetchAnimalShop()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { showLoading() }
             .doFinally { hideLoading() }

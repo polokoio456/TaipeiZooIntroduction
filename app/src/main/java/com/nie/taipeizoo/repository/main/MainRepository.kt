@@ -5,6 +5,6 @@ import com.nie.taipeizoo.data.remote.model.zoo.AnimalShopResponse
 import io.reactivex.Single
 
 interface MainRepository {
-    fun fetchShop(): Single<AnimalShopResponse>
+    fun fetchAnimalShop(): Single<AnimalShopResponse>
     fun fetchPlantList(keyword: String): Single<PlantResponse>
 }

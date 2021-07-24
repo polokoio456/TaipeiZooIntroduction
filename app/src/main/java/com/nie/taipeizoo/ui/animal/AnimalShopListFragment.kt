@@ -40,7 +40,7 @@ class AnimalShopListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.fetchZooShop()
+        viewModel.fetchAnimalShop()
 
         initView()
         setOnClickListener()
@@ -78,7 +78,7 @@ class AnimalShopListFragment : BaseFragment() {
             setCancelable(false)
             setMessage(requireContext().getString(R.string.server_error))
             setNegativeButton(requireContext().getString(R.string.retry), { _, _ ->
-                viewModel.fetchZooShop()
+                viewModel.fetchAnimalShop()
             })
             setPositiveButton(requireContext().getString(R.string.cancel), { _, _ ->
                 requireActivity().finish()
