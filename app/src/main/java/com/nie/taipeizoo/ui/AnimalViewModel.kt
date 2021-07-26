@@ -9,7 +9,7 @@ import com.nie.taipeizoo.extension.bind
 import com.nie.taipeizoo.repository.main.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
+class AnimalViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
 
     companion object {
         private const val LOG_TAG = "TaipeiZoo"

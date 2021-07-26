@@ -11,9 +11,10 @@ import com.nie.taipeizoo.R
 import com.nie.taipeizoo.base.BaseFragment
 import com.nie.taipeizoo.databinding.FragmentAnimalShopListBinding
 import com.nie.taipeizoo.extension.addFragment
-import com.nie.taipeizoo.ui.MainViewModel
+import com.nie.taipeizoo.ui.AnimalViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AnimalShopListFragment : BaseFragment() {
 
@@ -23,7 +24,7 @@ class AnimalShopListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAnimalShopListBinding
 
-    override val viewModel by sharedViewModel<MainViewModel>()
+    override val viewModel by viewModel<AnimalViewModel>()
 
     private val adapter by inject<AnimalShopAdapter>()
 
