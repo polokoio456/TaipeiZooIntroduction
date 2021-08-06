@@ -17,11 +17,11 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun showLoading() {
-        _showLoading.value = true
+        _showLoading.postValue(true)
     }
 
     protected fun hideLoading() {
-        _showLoading.value = false
+        _showLoading.postValue(false)
     }
 
     override fun onCleared() {

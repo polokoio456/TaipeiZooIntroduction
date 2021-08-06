@@ -2,11 +2,15 @@ package com.nie.taipeizoo.ui.plant
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.nie.taipeizoo.base.BaseViewModel
 import com.nie.taipeizoo.data.remote.model.plant.Plant
 import com.nie.taipeizoo.extension.bind
 import com.nie.taipeizoo.repository.main.MainRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class PlantViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
 
@@ -17,14 +21,18 @@ class PlantViewModel(private val mainRepository: MainRepository) : BaseViewModel
     val showServerError: LiveData<Boolean> = _showServerError
 
     fun fetchPlantList(keyword: String) {
-        mainRepository.fetchPlantList(keyword)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { showLoading() }
-            .doFinally { hideLoading() }
-            .subscribe({
-                _plantList.value = it.result.results
-            }, {
-                _showServerError.value = true
-            }).bind(this)
+        viewModelScope.launch(Dispatchers.IO) {
+            showLoading()
+
+            try {
+                val response = mainRepository.fetchPlantList(keyword)
+                _plantList.postValue(response.result.results)
+            } catch (e: Exception) {
+                _showServerError.postValue(true)
+                hideLoading()
+            }
+
+            hideLoading()
+        }
     }
 }

@@ -8,13 +8,11 @@ import io.reactivex.schedulers.Schedulers
 
 class MainRepositoryImpl(private val api: Api) : MainRepository {
 
-    override fun fetchAnimalShop(): Single<AnimalShopResponse> {
+    override suspend fun fetchAnimalShop(): AnimalShopResponse {
         return  api.fetchAnimalShop()
-            .subscribeOn(Schedulers.io())
     }
 
-    override fun fetchPlantList(keyword: String): Single<PlantResponse> {
+    override suspend fun fetchPlantList(keyword: String): PlantResponse {
         return api.fetchPlantList(keyword)
-            .subscribeOn(Schedulers.io())
     }
 }

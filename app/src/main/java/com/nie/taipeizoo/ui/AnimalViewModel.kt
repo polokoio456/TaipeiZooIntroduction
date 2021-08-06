@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nie.taipeizoo.base.BaseViewModel
 import com.nie.taipeizoo.data.remote.model.zoo.AnimalShop
-import com.nie.taipeizoo.extension.bind
 import com.nie.taipeizoo.repository.main.MainRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.launch
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 
 class AnimalViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
 
@@ -22,15 +23,19 @@ class AnimalViewModel(private val mainRepository: MainRepository) : BaseViewMode
     val showServerError: LiveData<Boolean> = _showServerError
 
     fun fetchAnimalShop() {
-        mainRepository.fetchAnimalShop()
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { showLoading() }
-            .doFinally { hideLoading() }
-            .subscribe({
-                _animalShopList.value = it.result.results
-            }, {
-                Log.e(LOG_TAG, it.message ?: "fetchShop Failed!!!")
-                _showServerError.value = true
-            }).bind(this)
+        viewModelScope.launch(Dispatchers.IO) {
+            showLoading()
+
+            try {
+                val response = mainRepository.fetchAnimalShop()
+                _animalShopList.postValue(response.result.results)
+            } catch (e: Exception) {
+                Log.e(LOG_TAG, e.message ?: "fetchShop Failed!!!")
+                _showServerError.postValue(true)
+                hideLoading()
+            }
+
+            hideLoading()
+        }
     }
 }
